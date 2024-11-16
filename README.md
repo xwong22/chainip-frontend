@@ -1,6 +1,6 @@
 Hi, we are ChainIP.
 
-ChainIP is a decentralized IP launchpad that connects innovators with investors. Backers receive profit-sharing rights from patent licensing, while creators get funding for their IP development. Smart contracts ensure transparent and automated profit distribution.
+ChainIP is a **decentralized IP launchpad** that connects innovators with investors. Backers receive profit-sharing rights from patent licensing, while creators get funding for their IP development. Smart contracts ensure transparent and automated profit distribution.
 
 We have deployed the contracts on Scroll Sepolia and integrated Schema Hooks from Sign Protocol. Feel free to check them out!
 
