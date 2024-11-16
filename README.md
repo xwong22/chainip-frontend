@@ -14,7 +14,7 @@ We have deployed the contracts on Scroll Sepolia and integrated Schema Hooks fro
 
 ## Contract Repo
 
-[Link](https://github.com/xwong22/ChainIP)
+[ChainIP Contract Repo](https://github.com/xwong22/ChainIP)
 
 
 ## Getting Started
