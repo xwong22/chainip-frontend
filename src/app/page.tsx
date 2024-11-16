@@ -26,6 +26,9 @@ export default function Home() {
     try {
       // Check if MetaMask is installed
       if (typeof window.ethereum !== "undefined" && window.ethereum.isMetaMask) {
+        const network = await window.ethereum.request({ method: 'eth_chainId' });
+        console.log('Connected to network:', parseInt(network, 16)); // Will show chain ID
+
         // Request account access
         const accounts = await window.ethereum.request({ 
           method: 'eth_requestAccounts' 
@@ -66,9 +69,9 @@ export default function Home() {
   const fetchCampaigns = async () => {
     if (!contract) return;
 
-    const campaignCount = await contract.campaignCount();
     const fetchedCampaigns = [];
-    for (let i = 1; i <= campaignCount; i++) {
+    const count = await contract.campaignCount();
+    for (let i = 1; i <= count; i++) {
       const details = await contract.getCampaignDetails(i);
       fetchedCampaigns.push({ id: i, ...details });
     }
