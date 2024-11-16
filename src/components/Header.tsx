@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 
+import AiSearchBar from './AiSearchBar';
+
 export default function Header() {
   const [address, setAddress] = useState<string>('');
   const [isConnected, setIsConnected] = useState(false);
@@ -60,6 +62,7 @@ export default function Header() {
             ChainIP Launchpad
           </Link>
           <div className="flex items-center gap-4">
+            <AiSearchBar />
             <Link 
               href="/successful-projects"
               className="text-gray-600 hover:text-gray-900 transition-colors"

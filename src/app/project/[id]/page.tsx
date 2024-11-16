@@ -31,75 +31,218 @@ interface ProjectDetails {
 
 const IP_REQUEST_PRICE = "0.5"; // 0.5 ETH fixed price for IP requests
 
-const dummyProjects: Record<string, ProjectDetails> = {
+export const dummyProjects: Record<string, ProjectDetails> = {
   "1": {
-    // Ongoing Project
     creator: "0x1234567890123456789012345678901234567890",
-    creatorName: "Alice Johnson",
-    twitterHandle: "@alice_web3",
-    projectName: "Decentralized Patent Registry",
-    projectDescription: "Building a decentralized system for patent registration and management using blockchain technology. This platform will revolutionize how intellectual property is registered, tracked, and traded in the digital age.",
-    targetAmount: "10.0",
-    currentAmount: "6.5",
+    creatorName: "Dr. Sarah Chen",
+    twitterHandle: "@greenbuilding_tech",
+    projectName: "Green Building Materials Patent Development",
+    projectDescription: "A startup develops eco-friendly building materials to replace cement and reduce carbon emissions; benefits include patent licensing profit-sharing, early product access, and limited-edition material models for early investors.",
+    targetAmount: "12.0",
+    currentAmount: "8.5",
     deadline: Math.floor(Date.now() / 1000) + 864000, // 10 days from now
     finalized: false,
-    projectImage: "https://picsum.photos/seed/patent1/800/400",
+    projectImage: "https://picsum.photos/seed/green1/800/400",
     contributors: [
-      {
-        address: "0xabcd...1234",
-        amount: "3.0"
-      },
-      {
-        address: "0xefgh...5678",
-        amount: "2.0"
-      },
-      {
-        address: "0xijkl...9012",
-        amount: "1.5"
-      }
+      { address: "0xabcd...1234", amount: "4.5" },
+      { address: "0xefgh...5678", amount: "4.0" }
     ],
-    requestors: [], // No requestors for ongoing project
+    requestors: [],
     accumulatedProfits: "0"
   },
   "2": {
-    // Successful Project
     creator: "0x2345678901234567890123456789012345678901",
-    creatorName: "Bob Smith",
-    twitterHandle: "@bob_builds",
-    projectName: "Smart Contract IP Marketplace",
-    projectDescription: "A successful marketplace for trading intellectual property rights using smart contracts. The platform includes automated licensing, royalty distributions, and transparent tracking of IP ownership.",
-    targetAmount: "15.0",
-    currentAmount: "17.5",
-    deadline: Math.floor(Date.now() / 1000) - 864000, // 10 days ago
+    creatorName: "Dr. James Wilson",
+    twitterHandle: "@ai_medical",
+    projectName: "AI Medical Diagnosis Technology",
+    projectDescription: "A research team creates AI algorithms for early cancer detection to improve diagnostics and lower costs; benefits include patent revenue sharing, early access for healthcare providers, and free health consultations for small supporters.",
+    targetAmount: "20.0",
+    currentAmount: "22.5",
+    deadline: Math.floor(Date.now() / 1000) - 172800, // 2 days ago
     finalized: true,
-    projectImage: "https://picsum.photos/seed/patent2/800/400",
+    projectImage: "https://picsum.photos/seed/medical2/800/400",
     contributors: [
-      {
-        address: "0xmnop...3456",
-        amount: "5.0"
-      },
-      {
-        address: "0xqrst...7890",
-        amount: "7.5"
-      },
-      {
-        address: "0xuvwx...1234",
-        amount: "5.0"
-      }
+      { address: "0xijkl...9012", amount: "10.0" },
+      { address: "0xmnop...3456", amount: "12.5" }
     ],
     requestors: [
       {
-        address: "0xabcd...5678",
-        details: "Planning to integrate this marketplace into our existing DeFi platform to enable IP-backed lending.",
-        timestamp: Math.floor(Date.now() / 1000) - 172800 // 2 days ago
-      },
-      {
-        address: "0xefgh...9012",
-        details: "Would like to use this for our university's research commercialization program.",
-        timestamp: Math.floor(Date.now() / 1000) - 86400 // 1 day ago
+        address: "0xqrst...7890",
+        details: "Planning to implement in our regional hospital network",
+        timestamp: Math.floor(Date.now() / 1000) - 86400
       }
     ],
+    accumulatedProfits: "1.5"
+  },
+  "3": {
+    creator: "0x3456789012345678901234567890123456789012",
+    creatorName: "Dr. Marina Costa",
+    twitterHandle: "@oceancleanup_tech",
+    projectName: "Pollution-Free Ocean Plastic Recycling Device",
+    projectDescription: "A company develops a device using photocatalytic technology to break down ocean plastics; benefits include proportional patent revenue sharing, investor names on initial devices, and participation in marine conservation events.",
+    targetAmount: "15.0",
+    currentAmount: "16.2",
+    deadline: Math.floor(Date.now() / 1000) - 259200, // 3 days ago
+    finalized: true,
+    projectImage: "https://picsum.photos/seed/ocean3/800/400",
+    contributors: [
+      { address: "0xstuw...1234", amount: "8.0" },
+      { address: "0xvwxy...5678", amount: "5.2" },
+      { address: "0xz123...9012", amount: "3.0" }
+    ],
+    requestors: [
+      {
+        address: "0xenv1...7890",
+        details: "Interested in deploying in Pacific Ocean cleanup initiative",
+        timestamp: Math.floor(Date.now() / 1000) - 172800
+      }
+    ],
+    accumulatedProfits: "2.0"
+  },
+  "4": {
+    creator: "0x4567890123456789012345678901234567890123",
+    creatorName: "Prof. David Zhang",
+    twitterHandle: "@agritech_drones",
+    projectName: "Precision Agriculture Drone Technology",
+    projectDescription: "Engineers design drones with multispectral sensors to optimize farming practices; benefits include patent licensing profit-sharing, discounts on early devices for large investors, and participation in public testing.",
+    targetAmount: "18.0",
+    currentAmount: "12.5",
+    deadline: Math.floor(Date.now() / 1000) + 1209600, // 14 days from now
+    finalized: false,
+    projectImage: "https://picsum.photos/seed/drone4/800/400",
+    contributors: [
+      { address: "0xdron...1234", amount: "7.0" },
+      { address: "0xagri...5678", amount: "5.5" }
+    ],
+    requestors: [],
     accumulatedProfits: "0"
+  },
+  "5": {
+    creator: "0x5678901234567890123456789012345678901234",
+    creatorName: "Dr. Emily Roberts",
+    twitterHandle: "@battery_tech",
+    projectName: "Long-Life Rechargeable Battery Technology",
+    projectDescription: "A university team works on solid-state batteries for faster charging and improved lifespan, especially for EVs; benefits include profit-sharing from commercialization, licensing priority for manufacturers, and lab visit opportunities.",
+    targetAmount: "25.0",
+    currentAmount: "27.8",
+    deadline: Math.floor(Date.now() / 1000) - 432000, // 5 days ago
+    finalized: true,
+    projectImage: "https://picsum.photos/seed/battery5/800/400",
+    contributors: [
+      { address: "0xbatt...1234", amount: "15.0" },
+      { address: "0xengy...5678", amount: "8.8" },
+      { address: "0xtech...9012", amount: "4.0" }
+    ],
+    requestors: [
+      {
+        address: "0xmanf...7890",
+        details: "EV manufacturer interested in licensing for production",
+        timestamp: Math.floor(Date.now() / 1000) - 259200
+      }
+    ],
+    accumulatedProfits: "3.5"
+  },
+  "6": {
+    creator: "0x6789012345678901234567890123456789012345",
+    creatorName: "Dr. Aisha Patel",
+    twitterHandle: "@clean_water",
+    projectName: "Low-Cost Water Filtration Technology",
+    projectDescription: "A nonprofit develops nanomembrane filtration systems for clean drinking water in remote regions; benefits include patent revenue donations to environmental causes, technology use priority for humanitarian efforts, and supporter recognition.",
+    targetAmount: "10.0",
+    currentAmount: "7.2",
+    deadline: Math.floor(Date.now() / 1000) + 691200, // 8 days from now
+    finalized: false,
+    projectImage: "https://picsum.photos/seed/water6/800/400",
+    contributors: [
+      { address: "0xwatr...1234", amount: "4.2" },
+      { address: "0xfilt...5678", amount: "3.0" }
+    ],
+    requestors: [],
+    accumulatedProfits: "0"
+  },
+  "7": {
+    creator: "0x7890123456789012345678901234567890123456",
+    creatorName: "Dr. Marcus Chen",
+    twitterHandle: "@space_cleanup",
+    projectName: "Space Debris Cleanup Device",
+    projectDescription: "An aerospace company creates devices to collect and recycle space debris, reducing spacecraft collision risks; benefits include patent licensing revenue sharing, custom space models for enthusiasts, and livestream invites for first missions.",
+    targetAmount: "30.0",
+    currentAmount: "22.5",
+    deadline: Math.floor(Date.now() / 1000) + 1728000, // 20 days from now
+    finalized: false,
+    projectImage: "https://picsum.photos/seed/space7/800/400",
+    contributors: [
+      { address: "0xspce...1234", amount: "12.0" },
+      { address: "0xdebr...5678", amount: "10.5" }
+    ],
+    requestors: [],
+    accumulatedProfits: "0"
+  },
+  "8": {
+    creator: "0x8901234567890123456789012345678901234567",
+    creatorName: "Dr. Sophie Anderson",
+    twitterHandle: "@biotech_coating",
+    projectName: "Smart Antimicrobial Coating Technology",
+    projectDescription: "A biotech firm develops real-time antimicrobial coatings for hospitals and public spaces; benefits include revenue from patent licensing, free trials for institutions, and portable antimicrobial products for individual investors.",
+    targetAmount: "22.0",
+    currentAmount: "23.5",
+    deadline: Math.floor(Date.now() / 1000) - 345600, // 4 days ago
+    finalized: true,
+    projectImage: "https://picsum.photos/seed/biotech8/800/400",
+    contributors: [
+      { address: "0xanti...1234", amount: "12.0" },
+      { address: "0xbiot...5678", amount: "11.5" }
+    ],
+    requestors: [
+      {
+        address: "0xhosp...7890",
+        details: "Hospital chain interested in implementing in ICU units",
+        timestamp: Math.floor(Date.now() / 1000) - 172800
+      }
+    ],
+    accumulatedProfits: "1.8"
+  },
+  "9": {
+    creator: "0x9012345678901234567890123456789012345678",
+    creatorName: "Dr. Thomas Brown",
+    twitterHandle: "@eco_packaging",
+    projectName: "Biodegradable Packaging Material",
+    projectDescription: "Researchers develop plant-based biodegradable packaging for food and logistics; benefits include patent revenue sharing, eco-friendly sample packs, and invitations to research progress meetings for major backers.",
+    targetAmount: "16.0",
+    currentAmount: "11.8",
+    deadline: Math.floor(Date.now() / 1000) + 432000, // 5 days from now
+    finalized: false,
+    projectImage: "https://picsum.photos/seed/package9/800/400",
+    contributors: [
+      { address: "0xpack...1234", amount: "6.8" },
+      { address: "0xeco1...5678", amount: "5.0" }
+    ],
+    requestors: [],
+    accumulatedProfits: "0"
+  },
+  "10": {
+    creator: "0x0123456789012345678901234567890123456789",
+    creatorName: "Dr. Michael Lee",
+    twitterHandle: "@renewable_power",
+    projectName: "Renewable Energy Micro Turbine Generator",
+    projectDescription: "Engineers design low-cost, small-scale wind turbines for home use to meet daily power needs; benefits include patent licensing and sales revenue, early device access for large backers, and launch ceremony invites for investors.",
+    targetAmount: "14.0",
+    currentAmount: "15.2",
+    deadline: Math.floor(Date.now() / 1000) - 518400, // 6 days ago
+    finalized: true,
+    projectImage: "https://picsum.photos/seed/turbine10/800/400",
+    contributors: [
+      { address: "0xwind...1234", amount: "8.0" },
+      { address: "0xpwr2...5678", amount: "7.2" }
+    ],
+    requestors: [
+      {
+        address: "0xener...7890",
+        details: "Energy company interested in mass production licensing",
+        timestamp: Math.floor(Date.now() / 1000) - 345600
+      }
+    ],
+    accumulatedProfits: "2.2"
   }
 };
 

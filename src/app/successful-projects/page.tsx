@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 import Link from 'next/link';
 import { CROWDFUNDING_CONTRACT_ADDRESS } from '@/config/contracts';
 import CrowdfundingABI from '@/abi/Crowdfunding.json';
+import { dummyProjects } from '../project/[id]/page';
 
 interface Project {
   id: string;
@@ -22,43 +23,23 @@ export default function SuccessfulProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Using dummy data with images
   useEffect(() => {
-    setProjects([
-      {
-        id: "1",
-        projectName: "Decentralized Patent System",
-        creatorName: "Alice Johnson",
-        targetAmount: "5.0",
-        currentAmount: "5.2",
-        deadline: Math.floor(Date.now() / 1000) - 86400, // 1 day ago
-        finalized: true,
-        projectImage: "https://picsum.photos/800/400?random=1",
-        projectDescription: "A revolutionary system for managing and trading intellectual property rights using blockchain technology."
-      },
-      {
-        id: "2",
-        projectName: "IP Rights Management Platform",
-        creatorName: "Bob Smith",
-        targetAmount: "3.0",
-        currentAmount: "3.5",
-        deadline: Math.floor(Date.now() / 1000) - 172800, // 2 days ago
-        finalized: true,
-        projectImage: "https://picsum.photos/800/400?random=2",
-        projectDescription: "Streamlined platform for managing intellectual property rights and licenses across multiple jurisdictions."
-      },
-      {
-        id: "3",
-        projectName: "Smart Contract Patent System",
-        creatorName: "Charlie Brown",
-        targetAmount: "7.0",
-        currentAmount: "8.1",
-        deadline: Math.floor(Date.now() / 1000) - 259200, // 3 days ago
-        finalized: true,
-        projectImage: "https://picsum.photos/800/400?random=3",
-        projectDescription: "Automated patent filing and management system powered by smart contracts."
-      }
-    ]);
+    // Filter only completed projects from dummyProjects
+    const successfulProjects = Object.values(dummyProjects)
+      .filter(project => project.finalized)
+      .map(project => ({
+        id: project.id,
+        projectName: project.projectName,
+        creatorName: project.creatorName,
+        targetAmount: project.targetAmount,
+        currentAmount: project.currentAmount,
+        deadline: project.deadline,
+        finalized: project.finalized,
+        projectImage: project.projectImage,
+        projectDescription: project.projectDescription
+      }));
+
+    setProjects(successfulProjects);
     setLoading(false);
   }, []);
 

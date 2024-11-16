@@ -5,9 +5,10 @@ import { ethers } from 'ethers';
 import Link from 'next/link';
 import CrowdfundingABI from '../abi/Crowdfunding.json';
 import { CROWDFUNDING_CONTRACT_ADDRESS } from '@/config/contracts';
+import { dummyProjects } from './project/[id]/page';
 
 interface Project {
-  id: number;
+  id: string;
   creator: string;
   creatorName: string;
   twitterHandle: string;
@@ -30,50 +31,24 @@ export default function Home() {
 
   const fetchProjects = async () => {
     try {
-      // Temporary: Use dummy data instead of contract calls
-      const dummyProjects: Project[] = [
-        {
-          id: 1,
-          creator: "0x1234567890123456789012345678901234567890",
-          creatorName: "Alice Johnson",
-          twitterHandle: "@alice_web3",
-          projectName: "DeFi Education Platform",
-          projectDescription: "Building an interactive platform to teach DeFi concepts to beginners through gamification and hands-on exercises.",
-          targetAmount: "10.0",
-          currentAmount: "6.5",
-          deadline: Math.floor(Date.now() / 1000) + 864000, // 10 days from now
-          finalized: false,
-          projectImage: "https://picsum.photos/800/400"
-        },
-        {
-          id: 2,
-          creator: "0x2345678901234567890123456789012345678901",
-          creatorName: "Bob Smith",
-          twitterHandle: "@bob_builds",
-          projectName: "NFT Marketplace",
-          projectDescription: "Creating a carbon-neutral NFT marketplace focused on environmental sustainability and green initiatives.",
-          targetAmount: "15.0",
-          currentAmount: "3.0",
-          deadline: Math.floor(Date.now() / 1000) + 1728000, // 20 days from now
-          finalized: false,
-          projectImage: "https://picsum.photos/800/400"
-        },
-        {
-          id: 3,
-          creator: "0x3456789012345678901234567890123456789012",
-          creatorName: "Carol White",
-          twitterHandle: "@carol_crypto",
-          projectName: "DAO Governance Tool",
-          projectDescription: "Developing a user-friendly interface for DAO governance with integrated voting and proposal management.",
-          targetAmount: "8.0",
-          currentAmount: "7.9",
-          deadline: Math.floor(Date.now() / 1000) + 432000, // 5 days from now
-          finalized: false,
-          projectImage: "https://picsum.photos/800/400"
-        }
-      ];
+      // Filter only ongoing projects from dummyProjects
+      const activeProjects = Object.entries(dummyProjects)
+        .filter(([_, project]) => !project.finalized)
+        .map(([id, project]) => ({
+          id: id,
+          creator: project.creator,
+          creatorName: project.creatorName,
+          twitterHandle: project.twitterHandle,
+          projectName: project.projectName,
+          projectDescription: project.projectDescription,
+          targetAmount: project.targetAmount,
+          currentAmount: project.currentAmount,
+          deadline: project.deadline,
+          finalized: project.finalized,
+          projectImage: project.projectImage
+        }));
 
-      setProjects(dummyProjects);
+      setProjects(activeProjects);
     } catch (error) {
       console.error('Error fetching projects:', error);
     } finally {
