@@ -1,101 +1,125 @@
-import Image from "next/image";
+'use client'
+
+import { useState, useEffect } from "react";
+import { ethers } from "ethers";
+import CampaignForm from "@/components/CampaignForm";
+import CampaignCard from "@/components/CampaignCard";
+import CrowdfundingABI from "@/abi/Crowdfunding.json";
+
+// Add this type declaration at the top of your file, after the imports
+declare global {
+  interface Window {
+    ethereum?: any;
+  }
+}
+
+const CONTRACT_ADDRESS = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [campaigns, setCampaigns] = useState<any[]>([]);
+  const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
+  const [contract, setContract] = useState<ethers.Contract | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const [account, setAccount] = useState<string>("");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const connectWallet = async () => {
+    try {
+      // Check if MetaMask is installed
+      if (typeof window.ethereum !== "undefined" && window.ethereum.isMetaMask) {
+        // Request account access
+        const accounts = await window.ethereum.request({ 
+          method: 'eth_requestAccounts' 
+        });
+        
+        const web3Provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await web3Provider.getSigner();
+        const crowdfundingContract = new ethers.Contract(
+          CONTRACT_ADDRESS,
+          CrowdfundingABI,
+          signer
+        );
+
+        setAccount(accounts[0]);
+        setProvider(web3Provider);
+        setContract(crowdfundingContract);
+        setIsConnected(true);
+      } else {
+        alert("Please install MetaMask!");
+      }
+    } catch (error) {
+      console.error("Error connecting to MetaMask:", error);
+    }
+  };
+
+  useEffect(() => {
+    // Check if already connected
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      window.ethereum.request({ method: 'eth_accounts' })
+        .then((accounts: string[]) => {
+          if (accounts.length > 0) {
+            connectWallet();
+          }
+        });
+    }
+  }, []);
+
+  const fetchCampaigns = async () => {
+    if (!contract) return;
+
+    const campaignCount = await contract.campaignCount();
+    const fetchedCampaigns = [];
+    for (let i = 1; i <= campaignCount; i++) {
+      const details = await contract.getCampaignDetails(i);
+      fetchedCampaigns.push({ id: i, ...details });
+    }
+    setCampaigns(fetchedCampaigns);
+  };
+
+  useEffect(() => {
+    if (contract) {
+      fetchCampaigns();
+    }
+  }, [contract]);
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-800">
+            Crowdfunding DApp
+          </h1>
+          {!isConnected ? (
+            <button
+              onClick={connectWallet}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+            >
+              Connect MetaMask
+            </button>
+          ) : (
+            <div className="text-sm text-gray-600">
+              Connected: {account.slice(0, 6)}...{account.slice(-4)}
+            </div>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        
+        {isConnected ? (
+          <>
+            <div className="mb-12">
+              <CampaignForm contract={contract} fetchCampaigns={fetchCampaigns} />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {campaigns.map((campaign) => (
+                <CampaignCard key={campaign.id} campaign={campaign} />
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="text-center text-gray-600 mt-20">
+            Please connect your MetaMask wallet to view campaigns
+          </div>
+        )}
+      </div>
     </div>
   );
 }
