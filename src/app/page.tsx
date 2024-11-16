@@ -24,16 +24,17 @@ interface Project {
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showActive, setShowActive] = useState(true);
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [showActive]);
 
   const fetchProjects = async () => {
     try {
-      // Filter only ongoing projects from dummyProjects
-      const activeProjects = Object.entries(dummyProjects)
-        .filter(([_, project]) => !project.finalized)
+      // Filter projects based on active/successful state
+      const filteredProjects = Object.entries(dummyProjects)
+        .filter(([_, project]) => project.finalized !== showActive)
         .map(([id, project]) => ({
           id: id,
           creator: project.creator,
@@ -48,7 +49,7 @@ export default function Home() {
           projectImage: project.projectImage
         }));
 
-      setProjects(activeProjects);
+      setProjects(filteredProjects);
     } catch (error) {
       console.error('Error fetching projects:', error);
     } finally {
@@ -67,7 +68,28 @@ export default function Home() {
   return (
     <main className="container max-w-6xl mx-auto px-6 py-4">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-xl font-bold">Active Projects</h1>
+        <div className="inline-flex rounded-lg border border-gray-200">
+          <button
+            onClick={() => setShowActive(true)}
+            className={`px-4 py-2 text-sm font-medium ${
+              showActive
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 text-gray-500 hover:bg-gray-300'
+            }`}
+          >
+            Active Projects
+          </button>
+          <button
+            onClick={() => setShowActive(false)}
+            className={`px-4 py-2 text-sm font-medium ${
+              !showActive
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 text-gray-500 hover:bg-gray-300'
+            }`}
+          >
+            Successful Projects
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

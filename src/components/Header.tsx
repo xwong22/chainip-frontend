@@ -64,12 +64,6 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <AiSearchBar />
             <Link 
-              href="/successful-projects"
-              className="text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Successful Projects
-            </Link>
-            <Link 
               href="/create-project"
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
             >

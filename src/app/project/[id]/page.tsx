@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 import { useParams } from 'next/navigation';
 import { CROWDFUNDING_CONTRACT_ADDRESS } from '@/config/contracts';
 import CrowdfundingABI from '@/abi/Crowdfunding.json';
+import AiPriceEstimator from '@/components/AiPriceEstimator';
 
 interface ProjectDetails {
   creator: string;
@@ -28,8 +29,6 @@ interface ProjectDetails {
   }[];
   accumulatedProfits: string;
 }
-
-const IP_REQUEST_PRICE = "0.5"; // 0.5 ETH fixed price for IP requests
 
 export const dummyProjects: Record<string, ProjectDetails> = {
   "1": {
@@ -259,6 +258,7 @@ export default function ProjectDetails() {
   const [loading, setLoading] = useState(false);
   const [contribution, setContribution] = useState('');
   const [requestDetails, setRequestDetails] = useState('');
+  const [estimatedPrice, setEstimatedPrice] = useState<string>('');
 
   useEffect(() => {
     const loadProject = async () => {
@@ -343,10 +343,7 @@ export default function ProjectDetails() {
       setProject(prev => {
         if (!prev) return prev;
         
-        // Add the IP request price to accumulated profits
-        const newAccumulatedProfits = (
-          Number(prev.accumulatedProfits || "0") + Number(IP_REQUEST_PRICE)
-        ).toString();
+        const newAccumulatedProfits = (Number(prev.accumulatedProfits || "0") + Number(estimatedPrice)).toString();
         
         // Calculate and display individual profit distributions
         const profitMessage = prev.contributors.map(contributor => {
@@ -359,7 +356,7 @@ export default function ProjectDetails() {
         }).join('\n');
         
         setTimeout(() => {
-          alert(`IP request successful! Paid ${IP_REQUEST_PRICE} ETH\n\nProfit Distribution:\n${profitMessage}`);
+          alert(`IP request successful! Paid ${estimatedPrice} ETH\n\nProfit Distribution:\n${profitMessage}`);
         }, 500);
         
         return {
@@ -403,13 +400,26 @@ export default function ProjectDetails() {
       )}
       
       <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-        {/* Project Details */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="flex justify-between items-center mb-4">
           <div>
             <h2 className="text-sm text-gray-600">Creator</h2>
             <p className="font-medium">{project.creatorName}</p>
             <p className="text-blue-500">{project.twitterHandle}</p>
           </div>
+          <div className="w-full">
+            <AiPriceEstimator 
+              project={project} 
+              onEstimationComplete={(price) => setEstimatedPrice(price)}
+            />
+            {estimatedPrice && (
+              <p className="text-gray-600 text-center mt-2">
+                Estimated IP Request Price: {estimatedPrice} ETH
+              </p>
+            )}
+          </div>
+        </div>
+        {/* Project Details */}
+        <div className="grid grid-cols-2 gap-4 mb-6">
           <div>
             <h2 className="text-sm text-gray-600">Wallet Address</h2>
             <p className="font-mono text-sm">{project.creator}</p>
@@ -508,9 +518,6 @@ export default function ProjectDetails() {
             <p className="text-green-800 font-medium text-center">
               This campaign was successfully funded! You can now request to use the IP.
             </p>
-            <p className="text-gray-600 text-center">
-              IP Request Price: {IP_REQUEST_PRICE} ETH
-            </p>
             <div className="w-full space-y-4">
               <textarea
                 value={requestDetails}
@@ -521,9 +528,10 @@ export default function ProjectDetails() {
               />
               <button
                 onClick={handleIPRequest}
+                disabled={!estimatedPrice || !requestDetails}
                 className="w-full px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
               >
-                Submit IP Usage Request ({IP_REQUEST_PRICE} ETH)
+                Submit IP Usage Request ({estimatedPrice} ETH)
               </button>
             </div>
           </div>
