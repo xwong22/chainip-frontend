@@ -39,13 +39,14 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     projectName: "Green Building Materials Patent Development",
     projectDescription: "A startup develops eco-friendly building materials to replace cement and reduce carbon emissions; benefits include patent licensing profit-sharing, early product access, and limited-edition material models for early investors.",
     targetAmount: "12.0",
-    currentAmount: "8.5",
-    deadline: Math.floor(Date.now() / 1000) + 864000, // 10 days from now
+    currentAmount: "9.0",
+    deadline: Math.floor(Date.now() / 1000) + 864000,
     finalized: false,
     projectImage: "https://picsum.photos/seed/green1/800/400",
     contributors: [
-      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "4.5" },
-      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "4.0" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "3.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "3.0" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "3.0" }
     ],
     requestors: [],
     accumulatedProfits: "0"
@@ -57,13 +58,14 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     projectName: "AI Medical Diagnosis Technology",
     projectDescription: "A research team creates AI algorithms for early cancer detection to improve diagnostics and lower costs; benefits include patent revenue sharing, early access for healthcare providers, and free health consultations for small supporters.",
     targetAmount: "20.0",
-    currentAmount: "22.5",
-    deadline: Math.floor(Date.now() / 1000) - 172800, // 2 days ago
+    currentAmount: "21.0",
+    deadline: Math.floor(Date.now() / 1000) - 172800,
     finalized: true,
     projectImage: "https://picsum.photos/seed/medical2/800/400",
     contributors: [
-      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "10.0" },
-      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "12.5" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "7.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "7.0" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "7.0" }
     ],
     requestors: [
       {
@@ -81,14 +83,14 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     projectName: "Pollution-Free Ocean Plastic Recycling Device",
     projectDescription: "A company develops a device using photocatalytic technology to break down ocean plastics; benefits include proportional patent revenue sharing, investor names on initial devices, and participation in marine conservation events.",
     targetAmount: "15.0",
-    currentAmount: "16.2",
-    deadline: Math.floor(Date.now() / 1000) - 259200, // 3 days ago
+    currentAmount: "15.0",
+    deadline: Math.floor(Date.now() / 1000) - 259200,
     finalized: true,
     projectImage: "https://picsum.photos/seed/ocean3/800/400",
     contributors: [
-      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "8.0" },
-      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "5.2" },
-      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "3.0" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "5.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "5.0" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "5.0" }
     ],
     requestors: [
       {
@@ -106,13 +108,14 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     projectName: "Precision Agriculture Drone Technology",
     projectDescription: "Engineers design drones with multispectral sensors to optimize farming practices; benefits include patent licensing profit-sharing, discounts on early devices for large investors, and participation in public testing.",
     targetAmount: "18.0",
-    currentAmount: "12.5",
-    deadline: Math.floor(Date.now() / 1000) + 1209600, // 14 days from now
+    currentAmount: "12.0",
+    deadline: Math.floor(Date.now() / 1000) + 1209600,
     finalized: false,
     projectImage: "https://picsum.photos/seed/drone4/800/400",
     contributors: [
-      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "7.0" },
-      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "5.5" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "4.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "4.0" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "4.0" }
     ],
     requestors: [],
     accumulatedProfits: "0"
@@ -124,14 +127,14 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     projectName: "Long-Life Rechargeable Battery Technology",
     projectDescription: "A university team works on solid-state batteries for faster charging and improved lifespan, especially for EVs; benefits include profit-sharing from commercialization, licensing priority for manufacturers, and lab visit opportunities.",
     targetAmount: "25.0",
-    currentAmount: "27.8",
-    deadline: Math.floor(Date.now() / 1000) - 432000, // 5 days ago
+    currentAmount: "27.0",
+    deadline: Math.floor(Date.now() / 1000) - 432000,
     finalized: true,
     projectImage: "https://picsum.photos/seed/battery5/800/400",
     contributors: [
-      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "15.0" },
-      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "8.8" },
-      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "4.0" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "9.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "9.0" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "9.0" }
     ],
     requestors: [
       {
@@ -149,12 +152,13 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     projectName: "Low-Cost Water Filtration Technology",
     projectDescription: "A nonprofit develops nanomembrane filtration systems for clean drinking water in remote regions; benefits include patent revenue donations to environmental causes, technology use priority for humanitarian efforts, and supporter recognition.",
     targetAmount: "10.0",
-    currentAmount: "7.2",
-    deadline: Math.floor(Date.now() / 1000) + 691200, // 8 days from now
+    currentAmount: "9.0",
+    deadline: Math.floor(Date.now() / 1000) + 691200,
     finalized: false,
     projectImage: "https://picsum.photos/seed/water6/800/400",
     contributors: [
-      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "4.2" },
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "3.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "3.0" },
       { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "3.0" }
     ],
     requestors: [],
@@ -167,13 +171,14 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     projectName: "Space Debris Cleanup Device",
     projectDescription: "An aerospace company creates devices to collect and recycle space debris, reducing spacecraft collision risks; benefits include patent licensing revenue sharing, custom space models for enthusiasts, and livestream invites for first missions.",
     targetAmount: "30.0",
-    currentAmount: "22.5",
-    deadline: Math.floor(Date.now() / 1000) + 1728000, // 20 days from now
+    currentAmount: "24.0",
+    deadline: Math.floor(Date.now() / 1000) + 1728000,
     finalized: false,
     projectImage: "https://picsum.photos/seed/space7/800/400",
     contributors: [
-      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "12.0" },
-      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "10.5" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "8.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "8.0" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "8.0" }
     ],
     requestors: [],
     accumulatedProfits: "0"
@@ -185,13 +190,14 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     projectName: "Smart Antimicrobial Coating Technology",
     projectDescription: "A biotech firm develops real-time antimicrobial coatings for hospitals and public spaces; benefits include revenue from patent licensing, free trials for institutions, and portable antimicrobial products for individual investors.",
     targetAmount: "22.0",
-    currentAmount: "23.5",
-    deadline: Math.floor(Date.now() / 1000) - 345600, // 4 days ago
+    currentAmount: "24.0",
+    deadline: Math.floor(Date.now() / 1000) - 345600,
     finalized: true,
     projectImage: "https://picsum.photos/seed/biotech8/800/400",
     contributors: [
-      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "12.0" },
-      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "11.5" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "8.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "8.0" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "8.0" }
     ],
     requestors: [
       {
@@ -209,13 +215,14 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     projectName: "Biodegradable Packaging Material",
     projectDescription: "Researchers develop plant-based biodegradable packaging for food and logistics; benefits include patent revenue sharing, eco-friendly sample packs, and invitations to research progress meetings for major backers.",
     targetAmount: "16.0",
-    currentAmount: "11.8",
-    deadline: Math.floor(Date.now() / 1000) + 432000, // 5 days from now
+    currentAmount: "12.0",
+    deadline: Math.floor(Date.now() / 1000) + 432000,
     finalized: false,
     projectImage: "https://picsum.photos/seed/package9/800/400",
     contributors: [
-      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "6.8" },
-      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "5.0" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "4.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "4.0" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "4.0" }
     ],
     requestors: [],
     accumulatedProfits: "0"
@@ -227,13 +234,14 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     projectName: "Renewable Energy Micro Turbine Generator",
     projectDescription: "Engineers design low-cost, small-scale wind turbines for home use to meet daily power needs; benefits include patent licensing and sales revenue, early device access for large backers, and launch ceremony invites for investors.",
     targetAmount: "14.0",
-    currentAmount: "15.2",
-    deadline: Math.floor(Date.now() / 1000) - 518400, // 6 days ago
+    currentAmount: "15.0",
+    deadline: Math.floor(Date.now() / 1000) - 518400,
     finalized: true,
     projectImage: "https://picsum.photos/seed/turbine10/800/400",
     contributors: [
-      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "8.0" },
-      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "7.2" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "5.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "5.0" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "5.0" }
     ],
     requestors: [
       {
@@ -251,6 +259,36 @@ const calculateProfit = (contributorAmount: string, totalAmount: string, accumul
   const profit = Number(accumulatedProfits) * (percentage / 100);
   return { percentage: percentage.toFixed(1), profit: profit.toFixed(2) };
 };
+
+const generateAIPrompt = (project: ProjectDetails) => `
+  As an AI price estimation expert for ChainIP Launchpad, analyze this patent project:
+  
+  Project: ${project.projectName}
+  Description: ${project.projectDescription}
+  Current Target Price: ${project.targetAmount} ETH
+  Current Raised: ${project.currentAmount} ETH
+  Number of Contributors: ${project.contributors.length}
+  Average Contribution: ${(Number(project.currentAmount) / Math.max(project.contributors.length, 1)).toFixed(2)} ETH
+  Number of Requestors: ${project.requestors.length}
+  Previous License Price: ${project.accumulatedProfits} ETH
+  Total Usage Requests: ${project.requestors.length}
+  Market Activity: ${project.requestors.length > 0 ? 'High' : 'Low'}
+
+  Based on these factors:
+  1. Project complexity and innovation level
+  2. Market potential and application scope
+  3. Current investor interest (number of contributors)
+  4. Industry standards and comparable patents
+  5. Recent market activity and demand
+  6. Previous licensing history
+  
+  Please provide the recommended price for this project.
+  Return only a number representing the ETH price, with no text or symbols. 
+  Feel free to use small decimals up to 5 decimal places.
+  Feel free to use very very small ETH price for the ease of demonstrating the transactions on testnet.
+  The max price is 0.001 ETH. Return only the number.
+`;
+// smaller ETH price is used to demonstrate the transactions on testnet
 
 export default function ProjectDetails() {
   const params = useParams();
@@ -272,26 +310,7 @@ export default function ProjectDetails() {
         if (projectData) {
           setProject(projectData);
           if (projectData.finalized) {
-            const prompt = `
-              As an AI price estimation expert for ChainIP Launchpad, analyze this patent project:
-              
-              Project: ${projectData.projectName}
-              Description: ${projectData.projectDescription}
-              Current Target Price: ${projectData.targetAmount} ETH
-              Current Raised: ${projectData.currentAmount} ETH
-              Number of Contributors: ${projectData.contributors.length}
-              Average Contribution: ${(Number(projectData.currentAmount) / Math.max(projectData.contributors.length, 1)).toFixed(2)} ETH
-
-              Based on these factors:
-              1. Project complexity and innovation level
-              2. Market potential and application scope
-              3. Current investor interest (number of contributors)
-              4. Industry standards and comparable patents
-              
-              Please provide the recommended price for this project.
-              Return only a number representing the ETH price, with no text or symbols.
-              The max price is 0.001 ETH. Return only the number.
-            `;
+            const prompt = generateAIPrompt(projectData);
             const aiResult = await AIClient.send(prompt);
             setEstimatedPrice(aiResult);
           }
@@ -386,24 +405,14 @@ export default function ProjectDetails() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       const userAddress = "0xbd606164d19e32474ccbda3012783b218e10e52e";
       
-      // Parse the estimatedPrice to ensure it's a valid number
       const parsedPrice = parseFloat(estimatedPrice.replace(/[^\d.-]/g, ''));
       
       if (isNaN(parsedPrice)) {
         throw new Error('Invalid price estimation');
       }
 
-      // convert to wei
       const weiPrice = BigInt(parsedPrice * 10**18);
-      // convert to string
-      // const parsedPriceString = parsedPrice.toString();
 
-
-      // connect to the contract of ProfitDistributionHook
-
-
-
-      // Create attestation for the IP usage request
       await createNotaryAttestation(
         userAddress,
         weiPrice,
@@ -414,22 +423,7 @@ export default function ProjectDetails() {
         if (!prev) return prev;
         
         const newAccumulatedProfits = (Number(prev.accumulatedProfits || "0") + parsedPrice).toString();
-        
-        // Calculate and display individual profit distributions
-        const profitMessage = prev.contributors.map(contributor => {
-          const { percentage, profit } = calculateProfit(
-            contributor.amount,
-            prev.currentAmount,
-            newAccumulatedProfits
-          );
-          return `${contributor.address}: ${profit} ETH (${percentage}%)`;
-        }).join('\n');
-        
-        setTimeout(() => {
-          alert(`IP request successful! Paid ${parsedPrice} ETH\n\nProfit Distribution:\n${profitMessage}`);
-        }, 500);
-        
-        return {
+        const updatedProject = {
           ...prev,
           accumulatedProfits: newAccumulatedProfits,
           requestors: [
@@ -441,6 +435,37 @@ export default function ProjectDetails() {
             }
           ]
         };
+
+        // Get new price estimation after request
+        (async () => {
+          try {
+            const newPrompt = generateAIPrompt(updatedProject);
+            const newAiResult = await AIClient.send(newPrompt);
+            setEstimatedPrice(newAiResult);
+          } catch (error) {
+            console.error('Error updating price estimation:', error);
+          }
+        })();
+        
+        // Calculate and display profit distributions
+        const profitMessage = updatedProject.contributors.map(contributor => {
+          const { percentage, profit } = calculateProfit(
+            contributor.amount,
+            updatedProject.currentAmount,
+            newAccumulatedProfits
+          );
+          return `${contributor.address}: ${profit} ETH (${percentage}%)`;
+        }).join('\n');
+        
+        // setTimeout(() => {
+        //   alert(`IP request successful! Paid ${parsedPrice} ETH\n\nProfit Distribution:\n${profitMessage}`);
+        // }, 500);
+
+        setTimeout(() => {
+          alert(`IP request successful! Paid ${parsedPrice} ETH`);
+        }, 500);
+        
+        return updatedProject;
       });
 
       setRequestDetails('');
@@ -475,11 +500,6 @@ export default function ProjectDetails() {
             <h2 className="text-sm text-gray-600">Creator</h2>
             <p className="font-medium">{project.creatorName}</p>
             <p className="text-blue-500">{project.twitterHandle}</p>
-          </div>
-          <div>
-            <AiPriceEstimator 
-              project={project} 
-            />
           </div>
         </div>
         {/* Project Details */}
@@ -584,7 +604,7 @@ export default function ProjectDetails() {
             </p>
             <div className="w-full">
               <div className="text-center text-gray-600">
-                {estimatedPrice ? `Current IP Request Price: ${estimatedPrice}` : 'Calculating price...'}
+                {estimatedPrice ? `Current IP Request Price: ${estimatedPrice} ETH` : 'Calculating price...'}
               </div>
             </div>
             <div className="w-full space-y-4">
@@ -601,7 +621,7 @@ export default function ProjectDetails() {
                 className="w-full px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:bg-gray-400"
               >
                 {estimatedPrice 
-                  ? `Submit IP Usage Request (${estimatedPrice} )`
+                  ? `Submit IP Usage Request (${estimatedPrice} ETH)`
                   : 'Get price estimate first'
                 }
               </button>
