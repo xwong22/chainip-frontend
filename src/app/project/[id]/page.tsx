@@ -5,7 +5,8 @@ import { ethers } from 'ethers';
 import { useParams } from 'next/navigation';
 import { CROWDFUNDING_CONTRACT_ADDRESS } from '@/config/contracts';
 import CrowdfundingABI from '@/abi/Crowdfunding.json';
-import AiPriceEstimator from '@/components/AiPriceEstimator';
+import AiPriceEstimator, { AIClient } from '@/components/AiPriceEstimator';
+import { createNotaryAttestation } from '@/scripts/createAttestation';
 
 interface ProjectDetails {
   creator: string;
@@ -43,8 +44,8 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     finalized: false,
     projectImage: "https://picsum.photos/seed/green1/800/400",
     contributors: [
-      { address: "0xabcd...1234", amount: "4.5" },
-      { address: "0xefgh...5678", amount: "4.0" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "4.5" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "4.0" }
     ],
     requestors: [],
     accumulatedProfits: "0"
@@ -61,8 +62,8 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     finalized: true,
     projectImage: "https://picsum.photos/seed/medical2/800/400",
     contributors: [
-      { address: "0xijkl...9012", amount: "10.0" },
-      { address: "0xmnop...3456", amount: "12.5" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "10.0" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "12.5" }
     ],
     requestors: [
       {
@@ -85,9 +86,9 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     finalized: true,
     projectImage: "https://picsum.photos/seed/ocean3/800/400",
     contributors: [
-      { address: "0xstuw...1234", amount: "8.0" },
-      { address: "0xvwxy...5678", amount: "5.2" },
-      { address: "0xz123...9012", amount: "3.0" }
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "8.0" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "5.2" },
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "3.0" }
     ],
     requestors: [
       {
@@ -110,8 +111,8 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     finalized: false,
     projectImage: "https://picsum.photos/seed/drone4/800/400",
     contributors: [
-      { address: "0xdron...1234", amount: "7.0" },
-      { address: "0xagri...5678", amount: "5.5" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "7.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "5.5" }
     ],
     requestors: [],
     accumulatedProfits: "0"
@@ -128,9 +129,9 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     finalized: true,
     projectImage: "https://picsum.photos/seed/battery5/800/400",
     contributors: [
-      { address: "0xbatt...1234", amount: "15.0" },
-      { address: "0xengy...5678", amount: "8.8" },
-      { address: "0xtech...9012", amount: "4.0" }
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "15.0" },
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "8.8" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "4.0" }
     ],
     requestors: [
       {
@@ -153,8 +154,8 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     finalized: false,
     projectImage: "https://picsum.photos/seed/water6/800/400",
     contributors: [
-      { address: "0xwatr...1234", amount: "4.2" },
-      { address: "0xfilt...5678", amount: "3.0" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "4.2" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "3.0" }
     ],
     requestors: [],
     accumulatedProfits: "0"
@@ -171,8 +172,8 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     finalized: false,
     projectImage: "https://picsum.photos/seed/space7/800/400",
     contributors: [
-      { address: "0xspce...1234", amount: "12.0" },
-      { address: "0xdebr...5678", amount: "10.5" }
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "12.0" },
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "10.5" }
     ],
     requestors: [],
     accumulatedProfits: "0"
@@ -189,8 +190,8 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     finalized: true,
     projectImage: "https://picsum.photos/seed/biotech8/800/400",
     contributors: [
-      { address: "0xanti...1234", amount: "12.0" },
-      { address: "0xbiot...5678", amount: "11.5" }
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "12.0" },
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "11.5" }
     ],
     requestors: [
       {
@@ -213,8 +214,8 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     finalized: false,
     projectImage: "https://picsum.photos/seed/package9/800/400",
     contributors: [
-      { address: "0xpack...1234", amount: "6.8" },
-      { address: "0xeco1...5678", amount: "5.0" }
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "6.8" },
+      { address: "0x91c871d879e5d885e06dE58979986137b032724b", amount: "5.0" }
     ],
     requestors: [],
     accumulatedProfits: "0"
@@ -231,8 +232,8 @@ export const dummyProjects: Record<string, ProjectDetails> = {
     finalized: true,
     projectImage: "https://picsum.photos/seed/turbine10/800/400",
     contributors: [
-      { address: "0xwind...1234", amount: "8.0" },
-      { address: "0xpwr2...5678", amount: "7.2" }
+      { address: "0x6373336291468Cb9463d131aF8069a52cda3A537", amount: "8.0" },
+      { address: "0xa2C9b0F51Cf90cf3659a15963CA58E4058111cBF", amount: "7.2" }
     ],
     requestors: [
       {
@@ -259,17 +260,41 @@ export default function ProjectDetails() {
   const [contribution, setContribution] = useState('');
   const [requestDetails, setRequestDetails] = useState('');
   const [estimatedPrice, setEstimatedPrice] = useState<string>('');
+  const [currentNetwork, setCurrentNetwork] = useState<string>('');
 
   useEffect(() => {
     const loadProject = async () => {
       setLoading(true);
       try {
-        // Simulate API delay
         await new Promise(resolve => setTimeout(resolve, 1000));
         
         const projectData = dummyProjects[id];
         if (projectData) {
           setProject(projectData);
+          if (projectData.finalized) {
+            const prompt = `
+              As an AI price estimation expert for ChainIP Launchpad, analyze this patent project:
+              
+              Project: ${projectData.projectName}
+              Description: ${projectData.projectDescription}
+              Current Target Price: ${projectData.targetAmount} ETH
+              Current Raised: ${projectData.currentAmount} ETH
+              Number of Contributors: ${projectData.contributors.length}
+              Average Contribution: ${(Number(projectData.currentAmount) / Math.max(projectData.contributors.length, 1)).toFixed(2)} ETH
+
+              Based on these factors:
+              1. Project complexity and innovation level
+              2. Market potential and application scope
+              3. Current investor interest (number of contributors)
+              4. Industry standards and comparable patents
+              
+              Please provide the recommended price for this project.
+              Return only a number representing the ETH price, with no text or symbols.
+              The max price is 0.001 ETH. Return only the number.
+            `;
+            const aiResult = await AIClient.send(prompt);
+            setEstimatedPrice(aiResult);
+          }
         }
       } catch (error) {
         console.error('Error loading project:', error);
@@ -281,6 +306,27 @@ export default function ProjectDetails() {
     loadProject();
   }, [id]);
 
+  useEffect(() => {
+    const checkNetwork = async () => {
+      try {
+        // Check if window.ethereum exists
+        if (typeof window !== 'undefined' && window.ethereum) {
+          const provider = new ethers.BrowserProvider(window.ethereum);
+          const network = await provider.getNetwork();
+          setCurrentNetwork(`${network.name} (Chain ID: ${network.chainId})`);
+          console.log('Current network:', network);
+        } else {
+          setCurrentNetwork('No Web3 Provider detected');
+        }
+      } catch (error) {
+        console.error('Error checking network:', error);
+        setCurrentNetwork('Error detecting network');
+      }
+    };
+
+    checkNetwork();
+  }, []);
+
   const handleContribute = async () => {
     if (!contribution || loading) return;
     setLoading(true);
@@ -289,7 +335,7 @@ export default function ProjectDetails() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Use a more realistic dummy address
-      const userAddress = "0xyzab...7890";
+      const userAddress = "0x6373336291468Cb9463d131aF8069a52cda3A537";
       
       setProject(prev => {
         if (!prev) return prev;
@@ -333,17 +379,41 @@ export default function ProjectDetails() {
   };
 
   const handleIPRequest = async () => {
-    if (!requestDetails || loading) return;
+    if (!requestDetails || loading || !estimatedPrice) return;
     setLoading(true);
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1000));
-      const userAddress = "0xyzab...7890";
+      const userAddress = "0xbd606164d19e32474ccbda3012783b218e10e52e";
+      
+      // Parse the estimatedPrice to ensure it's a valid number
+      const parsedPrice = parseFloat(estimatedPrice.replace(/[^\d.-]/g, ''));
+      
+      if (isNaN(parsedPrice)) {
+        throw new Error('Invalid price estimation');
+      }
+
+      // convert to wei
+      const weiPrice = BigInt(parsedPrice * 10**18);
+      // convert to string
+      // const parsedPriceString = parsedPrice.toString();
+
+
+      // connect to the contract of ProfitDistributionHook
+
+
+
+      // Create attestation for the IP usage request
+      await createNotaryAttestation(
+        userAddress,
+        weiPrice,
+        Number(id)
+      );
       
       setProject(prev => {
         if (!prev) return prev;
         
-        const newAccumulatedProfits = (Number(prev.accumulatedProfits || "0") + Number(estimatedPrice)).toString();
+        const newAccumulatedProfits = (Number(prev.accumulatedProfits || "0") + parsedPrice).toString();
         
         // Calculate and display individual profit distributions
         const profitMessage = prev.contributors.map(contributor => {
@@ -356,7 +426,7 @@ export default function ProjectDetails() {
         }).join('\n');
         
         setTimeout(() => {
-          alert(`IP request successful! Paid ${estimatedPrice} ETH\n\nProfit Distribution:\n${profitMessage}`);
+          alert(`IP request successful! Paid ${parsedPrice} ETH\n\nProfit Distribution:\n${profitMessage}`);
         }, 500);
         
         return {
@@ -400,22 +470,16 @@ export default function ProjectDetails() {
       )}
       
       <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-        <div className="flex justify-between items-center mb-4">
-          <div>
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="space-y-1">
             <h2 className="text-sm text-gray-600">Creator</h2>
             <p className="font-medium">{project.creatorName}</p>
             <p className="text-blue-500">{project.twitterHandle}</p>
           </div>
-          <div className="w-full">
+          <div>
             <AiPriceEstimator 
               project={project} 
-              onEstimationComplete={(price) => setEstimatedPrice(price)}
             />
-            {estimatedPrice && (
-              <p className="text-gray-600 text-center mt-2">
-                Estimated IP Request Price: {estimatedPrice} ETH
-              </p>
-            )}
           </div>
         </div>
         {/* Project Details */}
@@ -518,6 +582,11 @@ export default function ProjectDetails() {
             <p className="text-green-800 font-medium text-center">
               This campaign was successfully funded! You can now request to use the IP.
             </p>
+            <div className="w-full">
+              <div className="text-center text-gray-600">
+                {estimatedPrice ? `Current IP Request Price: ${estimatedPrice}` : 'Calculating price...'}
+              </div>
+            </div>
             <div className="w-full space-y-4">
               <textarea
                 value={requestDetails}
@@ -529,9 +598,12 @@ export default function ProjectDetails() {
               <button
                 onClick={handleIPRequest}
                 disabled={!estimatedPrice || !requestDetails}
-                className="w-full px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                className="w-full px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:bg-gray-400"
               >
-                Submit IP Usage Request ({estimatedPrice} ETH)
+                {estimatedPrice 
+                  ? `Submit IP Usage Request (${estimatedPrice} )`
+                  : 'Get price estimate first'
+                }
               </button>
             </div>
           </div>
@@ -633,6 +705,10 @@ export default function ProjectDetails() {
             </div>
           </div>
         )}
+      </div>
+
+      <div className="text-sm text-gray-600 mb-4">
+        Current Network: {currentNetwork}
       </div>
     </div>
   );

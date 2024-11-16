@@ -97,8 +97,6 @@ const AiSearchBar: React.FC = () => {
     Please provide your question:
   `;
 
-  console.log("fixedPrompt", fixedPrompt); 
-
   const handleGenerate = async () => {
     if (!query.trim()) {
       setResult("Please enter a query.");
