@@ -1,3 +1,7 @@
+# ChainIP: Empowering Innovation, One Patent at a Time
+## Decentralized IP Launchpad
+
+
 Hi, we are ChainIP.
 
 ChainIP is a **decentralized IP launchpad** that connects innovators with investors. Backers receive profit-sharing rights from patent licensing, while creators get funding for their IP development. Smart contracts ensure transparent and automated profit distribution.
